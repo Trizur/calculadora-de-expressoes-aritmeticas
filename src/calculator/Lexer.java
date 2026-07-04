@@ -60,6 +60,16 @@ public class Lexer {
                 i++;
                 continue;
             }
+            if (c == 'p') {
+                if(i + 1 < n && expressao.charAt(i + 1) == 'i') {
+                  tokens.enqueue(new Token(3.14159265));
+                    i += 2; // Avança dois caracteres
+                    continue;
+                } else {
+                    throw new CalculatorException(
+                        "Erro: caractere inválido encontrado: '" + c + "' na posição " + i + ".");
+                }
+            }
 
             // Operadores válidos
             if (OPERADORES_VALIDOS.indexOf(c) >= 0) {

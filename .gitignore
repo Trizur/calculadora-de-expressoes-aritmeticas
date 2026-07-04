@@ -1,8 +1,0 @@
-*.class
-   *.jar
-   .idea/
-   *.iml
-   out/
-   target/
-   bin/
-   .vscode/
