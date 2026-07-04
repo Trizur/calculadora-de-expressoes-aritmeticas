@@ -57,7 +57,7 @@ src/calculator/
 └── Calculator.java             (main - laço de leitura e impressão)
 ```
 
-## Como funciona (para o relatório)
+## Como funciona 
 
 1. **Lexer**: lê a expressão caractere a caractere e monta uma `MyQueue<Token>`
    com números, operadores (`+ - * / m`) e parênteses. Caracteres desconhecidos
@@ -79,7 +79,7 @@ src/calculator/
 - ✅ Pilha e fila implementadas do zero (`MyStack`, `MyQueue`), sem usar
   `java.util.Stack`/`java.util.Queue`.
 
-## Pontos extras que ainda podem ser adicionados (sugestões)
+## Pontos extras que ainda podem ser adicionados 
 
 - Suporte a números negativos/unários (ex: `-5 + 3`)
 - Potência (`^`), com precedência maior e associatividade à direita
@@ -87,6 +87,4 @@ src/calculator/
 - Constantes nomeadas (`pi`)
 - Funções (`max(a,b)`)
 
-Se quiserem implementar algum desses, é só pedir — o código já está estruturado
-de forma que dá pra estender cada peça (Lexer, ShuntingYard ou Evaluator)
-sem precisar reescrever o resto.
+
