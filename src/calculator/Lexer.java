@@ -13,12 +13,27 @@ public class Lexer {
         MyQueue<Token> tokens = new MyQueue<>();
         int i = 0;
         int n = expressao.length();
-
+        //guardando o último token para verificar se um operador é unário ou binário
+        Token ultimoToken = null;
         while (i < n) {
             char c = expressao.charAt(i);
 
             // Ignora espaços em branco
             if (Character.isWhitespace(c)) {
+                i++;
+                continue;
+            }
+            if(c == '-') {
+                boolean unario = (ultimoToken == null)
+                        || ultimoToken.getTipo() == Token.Tipo.OPERADOR
+                        || ultimoToken.getTipo() == Token.Tipo.PARENTESE_ESQ;
+ 
+                Token token = unario
+                        ? new Token(Token.Tipo.OPERADOR, "u-")   // negação (unário)
+                        : new Token(Token.Tipo.OPERADOR, "-");   // subtração (binário)
+ 
+                tokens.enqueue(token);
+                ultimoToken = token;
                 i++;
                 continue;
             }
@@ -40,30 +55,38 @@ public class Lexer {
                     numero.append(atual);
                     i++;
                 }
-
                 try {
-                    tokens.enqueue(new Token(Double.parseDouble(numero.toString())));
+                    Token token = new Token(Double.parseDouble(numero.toString()));
+                    tokens.enqueue(token);
+                    ultimoToken = token;
                 } catch (NumberFormatException e) {
                     throw new CalculatorException("Erro: número inválido '" + numero + "'.");
                 }
                 continue;
+               
             }
 
             // Parênteses
             if (c == '(') {
-                tokens.enqueue(new Token(Token.Tipo.PARENTESE_ESQ, "("));
+                Token token = new Token(Token.Tipo.PARENTESE_ESQ, "(");
+                tokens.enqueue(token);
+                ultimoToken = token;
                 i++;
                 continue;
             }
             if (c == ')') {
-                tokens.enqueue(new Token(Token.Tipo.PARENTESE_DIR, ")"));
+               Token token = new Token(Token.Tipo.PARENTESE_DIR, ")");
+                tokens.enqueue(token);
+                ultimoToken = token;
                 i++;
                 continue;
             }
             if (c == 'p') {
                 if(i + 1 < n && expressao.charAt(i + 1) == 'i') {
-                  tokens.enqueue(new Token(3.14159265));
-                    i += 2; // Avança dois caracteres
+                  Token token = new Token(3.14159265);
+                    tokens.enqueue(token);
+                    ultimoToken = token;
+                    i += 2;
                     continue;
                 } else {
                     throw new CalculatorException(
@@ -73,12 +96,14 @@ public class Lexer {
 
             // Operadores válidos
             if (OPERADORES_VALIDOS.indexOf(c) >= 0) {
-                tokens.enqueue(new Token(Token.Tipo.OPERADOR, String.valueOf(c)));
+                Token token = new Token(Token.Tipo.OPERADOR, String.valueOf(c));
+                tokens.enqueue(token);
+                ultimoToken = token;
                 i++;
                 continue;
             }
 
-            // Qualquer outro caractere é inválido
+            // Qualquer outro caractere 3é inválido
             throw new CalculatorException(
                 "Erro: caractere/operador inválido encontrado: '" + c + "' na posição " + i + ".");
         }

@@ -15,6 +15,19 @@ public class Evaluator {
                 pilhaValores.push(token.getNumero());
 
             } else if (token.getTipo() == Token.Tipo.OPERADOR) {
+
+                if (token.getValor().equals("u-")) {
+                    // Operador unário: só precisa de 1 operando
+                    if (pilhaValores.size() < 1) {
+                        throw new CalculatorException(
+                            "Erro: expressão inválida (falta operando para a negação '-').");
+                    }
+                    double a = pilhaValores.pop();
+                    pilhaValores.push(-a);
+                    continue;
+                }
+
+                // Operadores binários: precisam de 2 operandos
                 if (pilhaValores.size() < 2) {
                     throw new CalculatorException(
                         "Erro: expressão inválida (faltam operandos para o operador '"

@@ -17,11 +17,29 @@ public class ShuntingYard {
             case "/":
             case "m":
                 return 2;
+            case "u-": // operador unário (negação)
+            return 3;
             default:
                 throw new CalculatorException("Erro: operador desconhecido '" + operador + "'.");
         }
     }
 
+    // Só o unário é associativo à direita; os demais são à esquerda
+    private boolean associativoADireita(String operador) {
+        return operador.equals("u-");
+    }
+ 
+    // Decide se o operador no topo da pilha deve ser desempilhado
+    // antes de empilhar o operador atual (token)
+    private boolean deveDesempilhar(Token topo, Token atual) {
+        int precTopo = precedencia(topo.getValor());
+        int precAtual = precedencia(atual.getValor());
+        if (associativoADireita(atual.getValor())) {
+            return precTopo > precAtual;
+        }
+        return precTopo >= precAtual;
+    }
+    
     public MyQueue<Token> converterParaPosFixa(MyQueue<Token> tokensInfixos) {
         MyQueue<Token> saida = new MyQueue<>();
         MyStack<Token> pilhaOperadores = new MyStack<>();
@@ -40,7 +58,7 @@ public class ShuntingYard {
                     // (todos os operadores aqui são associativos à esquerda)
                     while (!pilhaOperadores.isEmpty()
                             && pilhaOperadores.peek().getTipo() == Token.Tipo.OPERADOR
-                            && precedencia(pilhaOperadores.peek().getValor()) >= precedencia(token.getValor())) {
+                            && deveDesempilhar(pilhaOperadores.peek(), token)) {
                         saida.enqueue(pilhaOperadores.pop());
                     }
                     pilhaOperadores.push(token);
