@@ -79,9 +79,9 @@ src/calculator/
 - ✅ Pilha e fila implementadas do zero (`MyStack`, `MyQueue`), sem usar
   `java.util.Stack`/`java.util.Queue`.
 - ✅Constantes nomeadas (`pi`)
+- ✅Suporte a números negativos/unários (ex: `-5 + 3`)
 ## Pontos extras que ainda podem ser adicionados 
 
-- Suporte a números negativos/unários (ex: `-5 + 3`)
 - Potência (`^`), com precedência maior e associatividade à direita
 - Operadores de mais de um caractere (`mod`, `log`)
 - Funções (`max(a,b)`)
