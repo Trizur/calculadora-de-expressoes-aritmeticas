@@ -7,7 +7,7 @@ package calculator;
 public class Lexer {
 
     // Operadores de um único caractere aceitos pela calculadora
-    private static final String OPERADORES_VALIDOS = "+-*/m";
+    private static final String OPERADORES_VALIDOS = "+-*/m^";
 
     public MyQueue<Token> tokenizar(String expressao) {
         MyQueue<Token> tokens = new MyQueue<>();

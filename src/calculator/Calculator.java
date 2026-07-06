@@ -15,7 +15,7 @@ public class Calculator {
         Evaluator evaluator = new Evaluator();
 
         System.out.println("=== Calculadora de Expressões Aritméticas (Shunting Yard) ===");
-        System.out.println("Operadores suportados: + - * / m (resto da divisão inteira)");
+        System.out.println("Operadores suportados: + - * / m (resto da divisão inteira) ^ (potenciação)");
         System.out.println("Parênteses são suportados para agrupamento.");
         System.out.println("Digite 'sair' para encerrar.\n");
 

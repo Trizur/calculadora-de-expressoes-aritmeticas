@@ -17,8 +17,10 @@ public class ShuntingYard {
             case "/":
             case "m":
                 return 2;
-            case "u-": // operador unário (negação)
-            return 3;
+            case "u-": // negação (unário)
+                return 3;
+            case "^": // potenciação (exponenciação)
+                return 4;
             default:
                 throw new CalculatorException("Erro: operador desconhecido '" + operador + "'.");
         }
@@ -26,7 +28,7 @@ public class ShuntingYard {
 
     // Só o unário é associativo à direita; os demais são à esquerda
     private boolean associativoADireita(String operador) {
-        return operador.equals("u-");
+        return operador.equals("u-") || operador.equals("^");
     }
  
     // Decide se o operador no topo da pilha deve ser desempilhado

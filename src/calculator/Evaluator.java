@@ -67,6 +67,8 @@ public class Evaluator {
                     throw new CalculatorException("Erro: módulo por zero.");
                 }
                 return (long) a % (long) b; // resto da divisão inteira
+            case "^":
+                return Math.pow(a, b);
             default:
                 throw new CalculatorException("Erro: operador desconhecido '" + operador + "'.");
         }
