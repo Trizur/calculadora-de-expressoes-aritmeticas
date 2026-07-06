@@ -80,9 +80,9 @@ src/calculator/
   `java.util.Stack`/`java.util.Queue`.
 - ✅Constantes nomeadas (`pi`)
 - ✅Suporte a números negativos/unários (ex: `-5 + 3`)
+- ✅Potência (`^`), com precedência maior e associatividade à direita
 ## Pontos extras que ainda podem ser adicionados 
 
-- Potência (`^`), com precedência maior e associatividade à direita
 - Operadores de mais de um caractere (`mod`, `log`)
 - Funções (`max(a,b)`)
 
